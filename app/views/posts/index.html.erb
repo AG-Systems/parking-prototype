@@ -1,0 +1,36 @@
+<% @posts.each do |post| %>
+<div id="main">
+    <div class="card">
+      <!-- <img class="card-img-top" src="http://placehold.it/350x150" alt="Card image cap"> --> 
+      <div style='width: 350px;'>
+        <div id="geolocation" style='width: 350px; height: 150px;'></div>
+      </div>
+      <div class="card-block">
+        <h4 class="card-title"><%= post.title %></h4>
+        <p class="card-text"><%= post.price %></p>
+        <a href="/posts/<%= post.id %>"><button>Purchase</button></a>
+      </div>
+    </div>
+</div>
+<script>
+    var lat = <%= post.lat %>
+    var lng = <%= post.lng %>
+var handler = Gmaps.build('Google');
+handler.buildMap({ internal: {id: 'geolocation'} }, function(){
+  // be aware chrome >= 50 requires https for geolocation to work
+  if(navigator.geolocation)
+    navigator.geolocation.getCurrentPosition(displayOnMap);
+});
+
+function displayOnMap(position){
+  var marker = handler.addMarker({
+    lat: lat,
+    lng: lng
+  });
+  handler.map.centerOn(marker);
+  handler.getMap().setZoom(13);
+};
+     
+    
+</script>
+<% end %>

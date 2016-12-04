@@ -1,0 +1,85 @@
+<div id="button-parking">
+<a href="/posts/new"><button type="button" class="btn btn-info">Post parking</button></a>
+</div>
+  <div style='width: 100%;'>
+    <div id="geolocation" style='width: 100%; height: 400px;'></div>
+  </div> 
+<div class="panel panel-default">
+  <h2 id="title-index"> Find parking! </h2>
+</div>
+<div class="panel-footer">
+    <div id='sidebar_container'>
+  </div>
+  <br>
+</div>
+<div id="view-all">
+  <a href="/posts"><button type="button" class="btn btn-primary" id="view-all-button">View all</button></a>
+</div>
+<script>
+json_array = [
+  ];
+<% @posts.each do |post|%>
+    var str1 = "<%= post.title %>";
+    var str2 = "<%= post.price %>";
+    
+    json_array.push({lat:<%= post.lat %>, lng: <%= post.lng %>, name: str1, infowindow: str2 });
+<% end %>
+
+function createSidebarLi(json){
+  return ("<li id=list-maps><a>" + json.name + "</a></li>");
+};
+
+function bindLiToMarker($li, marker){
+  $li.on('click', function(){
+    handler.getMap().setZoom(13);
+    marker.setMap(handler.getMap()); //because clusterer removes map property from marker
+    marker.panTo();
+    google.maps.event.trigger(marker.getServiceObject(), 'click');
+  })
+};
+
+function createSidebar(json_array){
+  _.each(json_array, function(json){
+    var $li = $( createSidebarLi(json) );
+    $li.appendTo('#sidebar_container');
+    bindLiToMarker($li, json.marker);
+  });
+};
+var handler = Gmaps.build('Google');
+handler.buildMap({ internal: {id: 'geolocation'} }, function(){
+  // be aware chrome >= 50 requires https for geolocation to work
+
+  if(navigator.geolocation)
+  {
+    navigator.geolocation.getCurrentPosition(displayOnMap);
+   /*
+    json_array.unshift(
+    {lat: 37.57397058830708, lng: -122.14805603027344, name: "Current Location", infowindow: "You are here"}
+    
+
+);
+    */
+  }
+var markers = handler.addMarkers(json_array);
+
+  _.each(json_array, function(json, index){
+    json.marker = markers[index];
+  });
+
+  createSidebar(json_array);
+  handler.bounds.extendWith(markers);
+  handler.fitMapToBounds();
+});
+
+function displayOnMap(position){
+  var marker = handler.addMarker({
+    lat: position.coords.latitude,
+    lng: position.coords.longitude
+  });
+  handler.map.centerOn(marker);
+  handler.getMap().setZoom(14);
+};
+
+    
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.5/vue.min.js"></script>

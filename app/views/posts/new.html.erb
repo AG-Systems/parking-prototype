@@ -1,0 +1,66 @@
+<div class="input-parking">
+<h1> Post parking </h1>
+<%= form_for :post, url: posts_path do |f| %>
+    <p>
+        <%= f.label :price %><br>
+        <%= f.number_field :price, in: 1.0..50.0, step: 0.5, required: true, placeholder: "For example: 5 = $5.00" %>
+    </p>
+    <p>
+        <%= f.label :duration %><br>
+        <%= f.number_field :duration, in: 1.0..50.0, step: 0.5, required: true, placeholder: "List in minutes" %>
+    </p>
+    <p>
+        <%= f.label :title %><br>
+        <%= f.text_field :title, required: true %>
+    </p>
+    <p>
+        <%= f.label :contact %><br>
+        <%= f.text_field :contact, required: true, placeholder: "Snapchat, phone #, etc" %>
+    </p>
+    <p>
+        <%= f.label :address %><br>
+        <%= f.text_field :address, placeholder: "Optional" %>
+    </p>
+    <div id="hidden">
+    <p>
+        <%= f.label :lat %><br>
+        <%= f.text_field :lat %>
+    </p>
+    
+    <p>
+        <%= f.label :lng %><br>
+        <%= f.text_field :lng %>
+    </p>
+    </div>
+    <p>
+        <%= f.submit %>
+    </p>
+</div>
+<script>
+$( document ).ready(function() {
+        $("#hidden").hide();
+        var lat = 0.0;
+        var lng = 0.0;
+        function getLocation() {
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+          } else {
+            alert("Geolocation is not supported by this browser.");
+          }
+        }
+        function showPosition(position) {
+           lat = position.coords.latitude;
+           lng = position.coords.longitude;
+          console.log(lng);
+          console.log(lat);
+        $("#post_lat").val(lat);
+        $("#post_lng").val(lng);
+         // map.setCenter(new google.maps.LatLng(lat, lng));
+        } 
+        console.log(getLocation());
+        
+
+});
+</script>
+
+<% end %>
