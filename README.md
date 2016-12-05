@@ -1,24 +1,14 @@
+Things that are needed to be done:
 
-     ,-----.,--.                  ,--. ,---.   ,--.,------.  ,------.
-    '  .--./|  | ,---. ,--.,--. ,-|  || o   \  |  ||  .-.  \ |  .---'
-    |  |    |  || .-. ||  ||  |' .-. |`..'  |  |  ||  |  \  :|  `--, 
-    '  '--'\|  |' '-' ''  ''  '\ `-' | .'  /   |  ||  '--'  /|  `---.
-     `-----'`--' `---'  `----'  `---'  `--'    `--'`-------' `------'
-    ----------------------------------------------------------------- 
+Make it look good. Looks so ugly right now
 
+Make a view your postings page
 
-Welcome to your Rails project on Cloud9 IDE!
+Add buttons under the local listings on the homepage
 
-To get started, just do the following:
+Make sure only people with accounts can post
 
-1. Run the project with the "Run Project" button in the menu bar on top of the IDE.
-2. Preview your new app by clicking on the URL that appears in the Run panel below (https://work4-ag-systems.c9users.io/).
+Fix the payment system. Figure out a way to make users have a balance
 
-Happy coding!
-The Cloud9 IDE team
+Figure out a logo and name
 
-
-## Support & Documentation
-
-Visit http://docs.c9.io for support, or to learn more about using Cloud9 IDE. 
-To watch some training videos, visit http://www.youtube.com/user/c9ide
