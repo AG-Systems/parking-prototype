@@ -7,6 +7,7 @@ class ChargesController < ApplicationController
       @post = Post.find(params[:id])
       @amount = @post.price
     
+    
       customer = Stripe::Customer.create(
         :email => params[:stripeEmail],
         :source  => params[:stripeToken]

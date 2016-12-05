@@ -7,7 +7,7 @@
     </p>
     <p>
         <%= f.label :duration %><br>
-        <%= f.number_field :duration, in: 1.0..50.0, step: 0.5, required: true, placeholder: "List in minutes" %>
+        <%= f.number_field :duration, in: 1.0..999999.0, step: 0.5, required: true, placeholder: "List in minutes" %>
     </p>
     <p>
         <%= f.label :title %><br>
