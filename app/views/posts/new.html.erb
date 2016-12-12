@@ -3,7 +3,7 @@
 <%= form_for :post, url: posts_path do |f| %>
     <p>
         <%= f.label :price %><br>
-        <%= f.number_field :price, in: 1.0..50.0, step: 0.5, required: true, placeholder: "For example: 5 = $5.00" %>
+        <%= f.number_field :price, in: 1.0..9999999.0, step: 0.5, required: true, placeholder: "For example: 5 = $5.00" %>
     </p>
     <p>
         <%= f.label :duration %><br>
